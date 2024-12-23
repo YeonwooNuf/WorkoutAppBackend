@@ -1,33 +1,48 @@
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+package com.example.workoutbackend.entity;
+
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "workouts")
 public class WorkoutDao {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private String guide;
-    private String bodyPart;
-    private String imageUrl; // 이미지 경로를 저장
+    private Long workoutId; // 운동 고유 식별자 (기본키), auto_increment 설정된 컬럼.
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
+    private String workoutName; // 운동 이름
+    private String guide; // 운동 방법(가이드)
+    private String bodyPart; // 운동 부위
+
+    private String workoutImagePath; // 운동 이미지 경로
+
+    // 기본 생성자
+    public WorkoutDao() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    // 생성자
+    public WorkoutDao(String workoutName, String guide, String bodyPart, String workoutImagePath) {
+        this.workoutName = workoutName;
+        this.guide = guide;
+        this.bodyPart = bodyPart;
+        this.workoutImagePath = workoutImagePath;
     }
 
-    public String getName() {
-        return name;
+    // Getter and Setter
+    public Long getWorkoutId() {
+        return workoutId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setWorkoutId(Long workoutId) {
+        this.workoutId = workoutId;
+    }
+
+    public String getWorkoutName() {
+        return workoutName;
+    }
+
+    public void setWorkoutName(String workoutName) {
+        this.workoutName = workoutName;
     }
 
     public String getGuide() {
@@ -46,11 +61,11 @@ public class WorkoutDao {
         this.bodyPart = bodyPart;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getWorkoutImagePath() {
+        return workoutImagePath;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setWorkoutImagePath(String workoutImagePath) {
+        this.workoutImagePath = workoutImagePath;
     }
 }

@@ -1,2 +1,19 @@
-package com.example.workoutbackend.config;public class CorsConfig {
+package com.example.workoutbackend.config;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+//모든 정책 허용하게 하는 코드
+@Configuration
+@SpringBootApplication
+public class CorsConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**") // 모든 URL 경로에 대해 CORS 정책 허용
+                .allowedOrigins("*") // 모든 도메인에서 오는 모든 HTTP 요청을 허용
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*");
+    }
 }

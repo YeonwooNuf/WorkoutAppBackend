@@ -1,62 +1,31 @@
-package com.example.deliverybackend.entity;
+package com.example.workoutbackend.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserDao {
 
     @Id
-    @Column(name = "user_number")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userNumber;
+    private Long userId; // 사용자 고유 식별자 (기본키), auto_increment 설정된 컬럼.
 
-
-    @Column(name = "user_id")
-    private String userId;
-
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "name")
     private String name;
-
-    @Column(name = "phone")
-    private String phone;
-
-    @Column(name = "email")
     private String email;
+    @Column(unique = true) // username(아이디)을 유니크로 설정하여 중복을 방지
+    private String username;
+    private String password;
+    private String phoneNumber;
+    private String gender;
+    private LocalDate birthDate;
 
-    public UserDao(Long userNumber) {
-        this.userNumber = userNumber;
-    }
-
-    public Long getUserNumber() {
-        return userNumber;
-    }
-
-    public void setUserNumber(Long userNumber) {
-        this.userNumber = userNumber;
-    }
-
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getName() {
@@ -67,14 +36,6 @@ public class UserDao {
         this.name = name;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -83,7 +44,43 @@ public class UserDao {
         this.email = email;
     }
 
+    public String getUsername() {
+        return username;
+    }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
 }
