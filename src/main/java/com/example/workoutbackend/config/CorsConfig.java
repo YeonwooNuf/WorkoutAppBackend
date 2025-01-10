@@ -6,7 +6,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //모든 정책 허용하게 하는 코드
 @Configuration
-@SpringBootApplication
 public class CorsConfig implements WebMvcConfigurer {
 
     @Override
