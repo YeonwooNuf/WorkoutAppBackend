@@ -1,9 +1,9 @@
 package com.example.workoutbackend.service;
 
-import com.example.workoutbackend.dto.UserPlanDto;
-import com.example.workoutbackend.entity.PlanDao;
-import com.example.workoutbackend.entity.UserPlanDao;
-import com.example.workoutbackend.entity.UserDao;
+import com.example.workoutbackend.entity.dto.UserPlanDto;
+import com.example.workoutbackend.entity.dao.PlanDao;
+import com.example.workoutbackend.entity.dao.UserPlanDao;
+import com.example.workoutbackend.entity.dao.UserDao;
 import com.example.workoutbackend.repository.PlanRepository;
 import com.example.workoutbackend.repository.UserPlanRepository;
 import com.example.workoutbackend.repository.UserRepository;

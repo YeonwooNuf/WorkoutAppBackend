@@ -1,7 +1,7 @@
 package com.example.workoutbackend.service;
 
-import com.example.workoutbackend.entity.UserDao;
-import com.example.workoutbackend.entity.UserDto;
+import com.example.workoutbackend.entity.dao.UserDao;
+import com.example.workoutbackend.entity.dto.UserDto;
 import com.example.workoutbackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

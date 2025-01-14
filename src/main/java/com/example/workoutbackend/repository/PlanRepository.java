@@ -1,6 +1,6 @@
 package com.example.workoutbackend.repository;
 
-import com.example.workoutbackend.entity.PlanDao;
+import com.example.workoutbackend.entity.dao.PlanDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

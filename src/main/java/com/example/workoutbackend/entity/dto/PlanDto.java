@@ -1,26 +1,16 @@
-package com.example.workoutbackend.entity;
+package com.example.workoutbackend.entity.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+public class PlanDto {
 
-@Entity
-@Table(name = "plans")
-public class PlanDao {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long planId;
-
     private int workoutDays;
     private String planName;
-    private String planStatus; // 선택 상태 (selected/unselected)
+    private String planStatus;
 
-    public PlanDao() {}
+    public PlanDto() {}
 
-    public PlanDao(int workoutDays, String planName, String planStatus) {
+    public PlanDto(Long planId, int workoutDays, String planName, String planStatus) {
+        this.planId = planId;
         this.workoutDays = workoutDays;
         this.planName = planName;
         this.planStatus = planStatus;

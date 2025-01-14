@@ -1,4 +1,4 @@
-package com.example.workoutbackend.entity;
+package com.example.workoutbackend.entity.dto;
 
 public class WorkoutDto {
     private Long workoutId;

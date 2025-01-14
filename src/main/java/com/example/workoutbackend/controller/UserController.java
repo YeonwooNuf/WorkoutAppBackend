@@ -1,6 +1,6 @@
 package com.example.workoutbackend.controller;
 
-import com.example.workoutbackend.entity.UserDto;
+import com.example.workoutbackend.entity.dto.UserDto;
 import com.example.workoutbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,13 +1,12 @@
 package com.example.workoutbackend.service;
 
-import com.example.workoutbackend.entity.WorkoutDto;
-import com.example.workoutbackend.entity.WorkoutDao;
+import com.example.workoutbackend.entity.dto.WorkoutDto;
+import com.example.workoutbackend.entity.dao.WorkoutDao;
 import com.example.workoutbackend.repository.WorkoutRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

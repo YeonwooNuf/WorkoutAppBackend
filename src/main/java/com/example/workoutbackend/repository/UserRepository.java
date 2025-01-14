@@ -1,6 +1,6 @@
 package com.example.workoutbackend.repository;
 
-import com.example.workoutbackend.entity.UserDao;
+import com.example.workoutbackend.entity.dao.UserDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 

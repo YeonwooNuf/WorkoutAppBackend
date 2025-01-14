@@ -1,4 +1,4 @@
-package com.example.workoutbackend.entity;
+package com.example.workoutbackend.entity.dao;
 
 import jakarta.persistence.*;
 

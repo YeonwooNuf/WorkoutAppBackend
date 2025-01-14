@@ -1,4 +1,4 @@
-package com.example.workoutbackend.dto;
+package com.example.workoutbackend.entity.dto;
 
 public class UserPlanDto {
 
