@@ -16,6 +16,12 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @GetMapping
+    public ResponseEntity<List<PostDto>> getAllPosts() {
+        List<PostDto> posts = postService.getAllPosts();
+        return ResponseEntity.ok(posts);
+    }
+
     // 게시글 생성
     @PostMapping("/{userId}")
     public ResponseEntity<PostDto> createPost(

@@ -48,17 +48,21 @@ public class PostService {
 
     private String saveImage(MultipartFile image) {
         try {
+            // 업로드 디렉토리 경로 설정
             Path uploadPath = Paths.get(UPLOAD_DIR);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
 
+            // 고유한 파일명 생성
             String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
             Path filePath = uploadPath.resolve(fileName);
+
+            // 이미지 저장
             Files.copy(image.getInputStream(), filePath);
 
-            System.out.println("Saved image at: " + filePath.toString()); // 경로 출력
-            return "/uploads/" + fileName;
+            // 클라이언트에서 접근 가능한 URL 반환
+            return "/uploads/" + fileName; // 상대 경로 반환
         } catch (IOException e) {
             throw new RuntimeException("Failed to store image", e);
         }
@@ -66,6 +70,13 @@ public class PostService {
 
     public List<PostDto> getPostsByUserId(Long userId) {
         return postRepository.findByAuthorUserId(userId)
+                .stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<PostDto> getAllPosts() {
+        return postRepository.findAll()
                 .stream()
                 .map(this::mapToDto)
                 .collect(Collectors.toList());
@@ -81,7 +92,7 @@ public class PostService {
         PostDto dto = new PostDto();
         dto.setPostId(post.getPostId());
         dto.setContent(post.getContent());
-        dto.setPostImageUrl(post.getPostImageUrl());
+        dto.setPostImageUrl(post.getPostImageUrl()); // 상대 경로 설정
         dto.setAuthorId(post.getAuthor().getUserId());
         dto.setAuthorUsername(post.getAuthor().getUsername());
         return dto;
