@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -48,21 +47,16 @@ public class PostService {
 
     private String saveImage(MultipartFile image) {
         try {
-            // 업로드 디렉토리 경로 설정
             Path uploadPath = Paths.get(UPLOAD_DIR);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
 
-            // 고유한 파일명 생성
             String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
             Path filePath = uploadPath.resolve(fileName);
-
-            // 이미지 저장
             Files.copy(image.getInputStream(), filePath);
 
-            // 클라이언트에서 접근 가능한 URL 반환
-            return "/uploads/" + fileName; // 상대 경로 반환
+            return "http://10.0.2.2:8080/uploads/" + fileName;  // ✅ 절대 경로 반환 (Flutter에서 접근 가능)
         } catch (IOException e) {
             throw new RuntimeException("Failed to store image", e);
         }
@@ -92,7 +86,7 @@ public class PostService {
         PostDto dto = new PostDto();
         dto.setPostId(post.getPostId());
         dto.setContent(post.getContent());
-        dto.setPostImageUrl(post.getPostImageUrl()); // 상대 경로 설정
+        dto.setPostImageUrl(post.getPostImageUrl());
         dto.setAuthorId(post.getAuthor().getUserId());
         dto.setAuthorUsername(post.getAuthor().getUsername());
         return dto;

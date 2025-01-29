@@ -22,12 +22,11 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
-    // 게시글 생성
     @PostMapping("/{userId}")
     public ResponseEntity<PostDto> createPost(
             @PathVariable Long userId,
-            @RequestParam("content") String content, // 텍스트 데이터
-            @RequestParam(value = "image", required = false) MultipartFile image) { // 이미지 파일
+            @RequestParam("content") String content,
+            @RequestParam(value = "image", required = false) MultipartFile image) {
         PostDto createdPost = postService.createPost(userId, content, image);
         return ResponseEntity.ok(createdPost);
     }
@@ -38,8 +37,6 @@ public class PostController {
         return ResponseEntity.ok().build();
     }
 
-
-    // 특정 사용자의 게시글 조회
     @GetMapping("/{userId}")
     public ResponseEntity<List<PostDto>> getPostsByUserId(@PathVariable Long userId) {
         List<PostDto> posts = postService.getPostsByUserId(userId);

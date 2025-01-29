@@ -1,5 +1,6 @@
 package com.example.workoutbackend.controller;
 
+import com.example.workoutbackend.entity.dao.UserDao;
 import com.example.workoutbackend.entity.dto.UserDto;
 import com.example.workoutbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
@@ -44,10 +48,13 @@ public class UserController {
     // 로그인 엔드포인트 추가
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody UserDto userDto) {
-        // 로그인 로직 처리 (예: 사용자 유효성 검사)
-        boolean isValidUser = userService.validateUser(userDto.getUsername(), userDto.getPassword());
-        if (isValidUser) {
-            return ResponseEntity.ok("로그인 성공");
+        UserDao user = userService.findByUsername(userDto.getUsername());
+
+        if (user != null && userService.validateUser(userDto.getUsername(), userDto.getPassword())) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("userId", user.getUserId()); // ✅ userId 반환
+            response.put("username", user.getUsername()); // ✅ username 반환
+            return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.status(401).body("아이디 혹은 비밀번호가 일치하지 않습니다.");
         }

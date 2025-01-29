@@ -16,6 +16,10 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public UserDao findByUsername(String username) {
+        return userRepository.findByUsername(username).orElse(null);
+    }
+
     public UserDao registerUser(UserDto userDto) {
         UserDao user = new UserDao();
         user.setName(userDto.getName());
