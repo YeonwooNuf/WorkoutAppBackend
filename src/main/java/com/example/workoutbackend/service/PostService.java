@@ -45,6 +45,7 @@ public class PostService {
         return mapToDto(savedPost);
     }
 
+    // 로컬 환경에서 게시글 사진을 받기 위함.
     private String saveImage(MultipartFile image) {
         try {
             Path uploadPath = Paths.get(UPLOAD_DIR);
@@ -52,15 +53,27 @@ public class PostService {
                 Files.createDirectories(uploadPath);
             }
 
-            String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
+//          String fileName = System.currentTimeMillis() + "_" + image.getOriginalFilename();
+            String fileName = image.getOriginalFilename();
             Path filePath = uploadPath.resolve(fileName);
-            Files.copy(image.getInputStream(), filePath);
 
-            return "http://10.0.2.2:8080/uploads/" + fileName;  // ✅ 절대 경로 반환 (Flutter에서 접근 가능)
+            // ✅ 절대 경로 반환 (Flutter에서 접근 가능)
+
+            // ✅ 파일이 이미 존재하면 새로 저장하지 않고 기존 경로 반환
+            if (Files.exists(filePath)) {
+                System.out.println("이미 존재하는 파일입니다: " + fileName);
+                return "http://10.0.2.2:8080/uploads/" + fileName;
+            }
+
+            // ✅ 파일이 존재하지 않는 경우만 저장
+            Files.copy(image.getInputStream(), filePath);
+            return "http://10.0.2.2:8080/uploads/" + fileName;
+
         } catch (IOException e) {
             throw new RuntimeException("Failed to store image", e);
         }
     }
+
 
     public List<PostDto> getPostsByUserId(Long userId) {
         return postRepository.findByAuthorUserId(userId)
